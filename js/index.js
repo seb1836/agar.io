@@ -1,45 +1,57 @@
+var circle = {
+  name: "fsdfs",
+  color: "red",
+  coordonnees: {
+    axeY: 54,
+    axeX: 56
+  }
+};
+
 //step 1
-document.getElementById("start").addEventListener("click", function() {
+
+var init = function() {
   document.getElementsByClassName(
     "chosenName"
   )[0].innerHTML = document.getElementById("name").value;
   document.getElementsByClassName(
     "disk"
   )[0].style.background = document.getElementById("colordisk").value;
-});
+};
 
-//step 2
+document.getElementById("start").addEventListener("click", init);
 
-var verti = 0;
-var horizon = 0;
-var moveVerti = 10;
-var moveHorizon = 10;
+//step 2 AND 3
 
-window.addEventListener("keydown", function(e) {
-  console.log(e);
+var y = 0;
+var x = 0;
+var SPEED = 1;
 
-  // e = e || window.event;
+var move = function(e) {
   if (e.key === "ArrowUp") {
     // up arrow
-    console.log("avant", verti);
-    verti -= moveVerti;
-    console.log("apres", verti);
-    document.getElementsByClassName("disk")[0].style.marginTop = `${verti}px`;
+    if (y !== 0) {
+      y -= SPEED;
+      document.getElementsByClassName("disk")[0].style.marginTop = `${y}px`;
+    }
   } else if (e.key === "ArrowDown") {
     // down arrow fonctionne
-    verti += moveVerti;
-    document.getElementsByClassName("disk")[0].style.marginTop = `${verti}px`;
+    if (y !== 440) {
+      y += SPEED;
+      document.getElementsByClassName("disk")[0].style.marginTop = `${y}px`;
+    }
   } else if (e.key === "ArrowLeft") {
     // left arrow
-    horizon -= moveHorizon;
-    document.getElementsByClassName(
-      "disk"
-    )[0].style.marginLeft = `${horizon}px`;
+    if (x !== 0) {
+      x -= SPEED;
+      document.getElementsByClassName("disk")[0].style.marginLeft = `${x}px`;
+    }
   } else if (e.key === "ArrowRight") {
     // right arrow fonctionne
-    horizon += moveHorizon;
-    document.getElementsByClassName(
-      "disk"
-    )[0].style.marginLeft = `${horizon}px`;
+    if (x !== 740) {
+      x += SPEED;
+      document.getElementsByClassName("disk")[0].style.marginLeft = `${x}px`;
+    }
   }
-});
+};
+
+window.addEventListener("keydown", move);
